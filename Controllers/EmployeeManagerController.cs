@@ -57,6 +57,30 @@ namespace EmployeeManager.Mvc.Controllers
         
         }
 
+        // Update Existing Employee 
+
+        public IActionResult Update(int id) 
+        {
+            FillCountries();
+            Employee model = db.Employees.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Employee model) 
+        {
+            FillCountries();
+            if (ModelState.IsValid) 
+            {
+                db.Employees.Update(model);
+                db.SaveChanges();
+                ViewBag.Message = "Employee update successfully";              
+            }
+            return View(model);
+        } 
+        
+
+
 
 
     }
