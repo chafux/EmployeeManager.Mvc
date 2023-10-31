@@ -77,9 +77,25 @@ namespace EmployeeManager.Mvc.Controllers
                 ViewBag.Message = "Employee update successfully";              
             }
             return View(model);
-        } 
-        
+        }
 
+        // Delete an Existing Employee
+        [ActionName("Delete")]
+        public IActionResult ConfirmDelete(int id) 
+        {
+            Employee model = db.Employees.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int employeeID) 
+        {
+            Employee model = db.Employees.Find(employeeID);
+            db.Employees.Remove(model);
+            db.SaveChanges();
+            TempData["message"] = "Employee deleted successfully";
+            return RedirectToAction("List");
+        }
 
 
 
