@@ -47,8 +47,7 @@ namespace EmployeeManager.Mvc.Controllers
                     AppIdentityRole role = new AppIdentityRole();
                     role.Name = "Manager";
                     role.Description = "Can perform CRUD operations.";
-                    IdentityResult roleResult = roleManager.
-                    CreateAsync(role).Result;
+                    IdentityResult roleResult = roleManager.CreateAsync(role).Result;
                 }
 
                 AppIdentityUser user = new AppIdentityUser();
@@ -57,8 +56,7 @@ namespace EmployeeManager.Mvc.Controllers
                 user.FullName = obj.FullName;
                 user.BirthDate = obj.BirthDate;
 
-                IdentityResult result = userManager.CreateAsync
-                (user, obj.Password).Result;
+                IdentityResult result = userManager.CreateAsync(user, obj.Password).Result;
 
                 if (result.Succeeded)
                 {
