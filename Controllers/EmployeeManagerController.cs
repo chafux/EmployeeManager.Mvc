@@ -1,4 +1,5 @@
 ﻿using EmployeeManager.Mvc.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManager.Mvc.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class EmployeeManagerController : Controller
     {
         private AppDbContext db = null;
@@ -44,6 +46,7 @@ namespace EmployeeManager.Mvc.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Insert(Employee model) 
         {
             FillCountries();
@@ -67,6 +70,7 @@ namespace EmployeeManager.Mvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Update(Employee model) 
         {
             FillCountries();
@@ -88,6 +92,7 @@ namespace EmployeeManager.Mvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int employeeID) 
         {
             Employee model = db.Employees.Find(employeeID);
